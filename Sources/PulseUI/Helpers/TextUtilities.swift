@@ -45,10 +45,15 @@ enum TextUtilities {
         if let range = getRange(of: "<style type=\"text/css\">") {
             insert(#"span { line-height: 1.4; }"#, at: range.upperBound)
             insert(#"body { word-wrap: break-word;  padding: 8px; }"#, at: range.upperBound)
-            // TODO: Rewrite this without sync
-            DispatchQueue.main.sync {
+            if Thread.isMainThread {
                 if isDarkMode {
                     insert(#"body { background-color: #2C2A28; }"#, at: range.upperBound)
+                }
+            } else {
+                DispatchQueue.main.sync {
+                    if isDarkMode {
+                        insert(#"body { background-color: #2C2A28; }"#, at: range.upperBound)
+                    }
                 }
             }
         }
