@@ -113,7 +113,7 @@ enum Graphics {
             kCGImageSourceCreateThumbnailFromImageAlways: true,
             kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
             kCGImageSourceCreateThumbnailWithTransform: true,
-            kCGImageSourceThumbnailMaxPixelSize: targetSize] as CFDictionary
+            kCGImageSourceThumbnailMaxPixelSize: targetSize] as [CFString : Any] as CFDictionary
         guard let image = CGImageSourceCreateThumbnailAtIndex(source, 0, options) else {
             return nil
         }
